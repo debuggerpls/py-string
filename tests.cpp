@@ -2,11 +2,14 @@
 #include "doctest.h"
 #include "py_string.h"
 
+#include <cstdio>
+#include <iostream>
+
 using namespace py_str;
 
 TEST_CASE("Construct, compare and print strings")
 {
-    std::string str1 { "String \n123!.," };
+    std::string str1 { "String \t123!.," };
 
     String py_str1 { str1 };
     String py_str2 = str1;
@@ -22,5 +25,11 @@ TEST_CASE("Construct, compare and print strings")
         CHECK(str1 == py_str1);
         CHECK(str1 == py_str2);
         CHECK(py_str1 == py_str3);
+    }
+
+    SUBCASE("Print strings")
+    {
+        CHECK(printf("Testing print: %s\n", py_str1.c_str()) > 0);
+        std::cout << "Testing print: " << py_str1 << std::endl;
     }
 }

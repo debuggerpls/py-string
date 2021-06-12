@@ -23,6 +23,11 @@ struct String {
         return str.empty();
     }
 
+    const char* c_str() const
+    {
+        return str.c_str();
+    }
+
     std::string str {};
 };
 
@@ -39,6 +44,12 @@ bool operator==(const std::string& lhs, const String& rhs)
 bool operator==(const String& lhs, const String& rhs)
 {
     return lhs.str == rhs.str;
+}
+
+std::ostream& operator<<(std::ostream& out, const String& string)
+{
+    out << string.str;
+    return out;
 }
 
 }
