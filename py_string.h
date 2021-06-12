@@ -28,6 +28,11 @@ struct String {
         return str.c_str();
     }
 
+    char& operator[](int i)
+    {
+        return i < 0 ? str[str.size() + i] : str[i];
+    }
+
     std::string str {};
 };
 
