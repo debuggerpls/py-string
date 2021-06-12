@@ -7,7 +7,38 @@
 
 #pragma once
 
-int return_val(int val) {
-    return val;
+#include <string>
+#include <utility>
+
+namespace py_str {
+
+struct String {
+    String(std::string str)
+        : str(std::move(str))
+    {
+    }
+
+    bool empty() const
+    {
+        return str.empty();
+    }
+
+    std::string str {};
+};
+
+bool operator==(const String& lhs, const std::string& rhs)
+{
+    return lhs.str == rhs;
 }
 
+bool operator==(const std::string& lhs, const String& rhs)
+{
+    return lhs == rhs.str;
+}
+
+bool operator==(const String& lhs, const String& rhs)
+{
+    return lhs.str == rhs.str;
+}
+
+}
