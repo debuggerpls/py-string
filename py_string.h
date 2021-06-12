@@ -23,6 +23,10 @@ struct String {
         return str.empty();
     }
 
+    std::string::size_type size() const {
+        return str.size();
+    }
+
     const char* c_str() const
     {
         return str.c_str();

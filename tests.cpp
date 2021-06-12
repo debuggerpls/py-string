@@ -27,6 +27,12 @@ TEST_CASE("Construct, compare and print strings")
         CHECK(str1 == py_str1);
         CHECK(str1 == py_str2);
         CHECK(py_str1 == py_str3);
+        CHECK(String{"test"} == "test");
+    }
+
+    SUBCASE("Size")
+    {
+        CHECK(String("hello").size() == 5);
     }
 
     SUBCASE("Print strings")
@@ -40,13 +46,29 @@ TEST_CASE("Indexing strings")
 {
     String py_str { "Hello world" };
 
-    SUBCASE("Positive indexes") {
+    SUBCASE("Positive indexes")
+    {
         CHECK(py_str[0] == 'H');
         CHECK(py_str[4] == 'o');
     }
 
-    SUBCASE("Negative indexes") {
+    SUBCASE("Negative indexes")
+    {
         CHECK(py_str[-1] == 'd');
         CHECK(py_str[-5] == 'w');
+    }
+}
+
+TEST_CASE("Slicing strings")
+{
+    String py_str { "Hello world" };
+
+    SUBCASE("Using slice methods")
+    {
+
+    }
+
+    SUBCASE("Using operator()")
+    {
     }
 }
