@@ -152,7 +152,7 @@ struct String {
     String& casefold()
     {
         for (auto& c : str)
-            c = tolower(c);
+            c = std::tolower(c);
         return *this;
     }
 
@@ -232,8 +232,23 @@ struct String {
 
     bool isalpha() const
     {
+        if (empty())
+            return false;
+
         for (auto c : str)
             if (!std::isalpha(c))
+                return false;
+
+        return true;
+    }
+
+    bool isdigit() const
+    {
+        if (empty())
+            return false;
+
+        for (auto c : str)
+            if (!std::isdigit(c))
                 return false;
 
         return true;

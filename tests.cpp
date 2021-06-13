@@ -198,6 +198,14 @@ TEST_CASE("Check if all chars are in the alphabet")
     SUBCASE("Special chars like spaces")
     {
         CHECK(String("hello world").isalpha() == false);
+        CHECK(String("").isalpha() == false);
         CHECK(String("\n\t").isalpha() == false);
     }
+}
+
+TEST_CASE("Check if all chars are digits")
+{
+    CHECK(String("hello").isdigit() == false);
+    CHECK(String().isdigit() == false);
+    CHECK(String("123455").isdigit() == true);
 }
