@@ -311,6 +311,7 @@ TEST_CASE("Strip left side")
     CHECK(String("####!!-Hello world").lstrip(String("#!-")) == "Hello world");
     CHECK(String("####!!-Hello world").lstrip("#-!") == "Hello world");
     CHECK(String("####!!-Hello world").lstrip("!- #") == "Hello world");
+    CHECK(String("####!!-!!!").lstrip("!- #") == "");
 }
 
 TEST_CASE("Strip right side")
@@ -320,6 +321,7 @@ TEST_CASE("Strip right side")
     CHECK(String("Hello").rstrip() == "Hello");
     CHECK(String("Hello world#!...,").rstrip("#.,!") == "Hello world");
     CHECK(String("Hello world#!...,").rstrip("!.,#") == "Hello world");
+    CHECK(String("####!!-!!!").rstrip("!- #") == "");
 }
 
 TEST_CASE("Strip characters from both sides")
@@ -328,5 +330,5 @@ TEST_CASE("Strip characters from both sides")
     CHECK(String("   Hello world   ").strip().len() == strlen("Hello world"));
     CHECK(String("Hello").strip() == "Hello");
     CHECK(String(",,,,,,,,,!!!!Hello world#!...,").strip("#.,!") == "Hello world");
-    CHECK(String("####Hello world#!...,").strip("!.,#") == "Hello world");
+    CHECK(String("####!!-!!!").strip("!- #") == "");
 }
