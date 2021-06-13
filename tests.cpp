@@ -312,3 +312,12 @@ TEST_CASE("Strip left side")
     CHECK(String("####!!-Hello world").lstrip("#-!") == "Hello world");
     CHECK(String("####!!-Hello world").lstrip("!- #") == "Hello world");
 }
+
+TEST_CASE("Strip right side")
+{
+    CHECK(String("   Hello world").rstrip() == "   Hello world");
+    CHECK(String("Hello world   ").rstrip().len() == strlen("Hello world"));
+    CHECK(String("Hello").rstrip() == "Hello");
+    CHECK(String("Hello world#!...,").rstrip("#.,!") == "Hello world");
+    CHECK(String("Hello world#!...,").rstrip("!.,#") == "Hello world");
+}

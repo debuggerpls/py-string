@@ -424,6 +424,46 @@ struct String {
         return *this;
     }
 
+    String& rstrip(const char ch = ' ')
+    {
+        auto pos = str.find_last_not_of(ch);
+        if (pos != Not_found) {
+            str.resize(pos + 1);
+        }
+
+        return *this;
+    }
+
+    String& rstrip(const char* string)
+    {
+        auto pos = str.find_last_not_of(string);
+        if (pos != Not_found) {
+            str.resize(pos + 1);
+        }
+
+        return *this;
+    }
+
+    String& rstrip(const std::string& string)
+    {
+        auto pos = str.find_last_not_of(string);
+        if (pos != Not_found) {
+            str.resize(pos + 1);
+        }
+
+        return *this;
+    }
+
+    String& rstrip(const String& string)
+    {
+        auto pos = str.find_last_not_of(string.str);
+        if (pos != Not_found) {
+            str.resize(pos + 1);
+        }
+
+        return *this;
+    }
+
     String& swapcase()
     {
         for (auto& c : str) {
