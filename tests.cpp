@@ -299,3 +299,17 @@ TEST_CASE("Swap case of chars")
 {
     CHECK(String("Hello my name is Deividas").swapcase() == "hELLO MY NAME IS dEIVIDAS");
 }
+
+TEST_CASE("Strip left side")
+{
+    CHECK(String("   Hello world").lstrip() == "Hello world");
+    CHECK(String("   Hello world").lstrip().len() == strlen("Hello world"));
+    CHECK(String("Hello").lstrip() == "Hello");
+    CHECK(String("####Hello world").lstrip("#") == "Hello world");
+    /* Order of chars to be stripped matters! */
+    CHECK(String("####!!-Hello world").lstrip("#!-") == "Hello world");
+    CHECK(String("####!!-Hello world").lstrip(std::string("#!-")) == "Hello world");
+    CHECK(String("####!!-Hello world").lstrip(String("#!-")) == "Hello world");
+    CHECK(String("####!!-Hello world").lstrip("#-!") == "-Hello world");
+    CHECK(String("####!!-Hello world").lstrip("!- #") == "!!-Hello world");
+}

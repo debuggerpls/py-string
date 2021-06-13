@@ -380,6 +380,41 @@ struct String {
         return str.find(value.c_str()) == 0;
     }
 
+    String& lstrip(const char ch = ' ')
+    {
+        auto pos = str.find_first_not_of(ch);
+        if (pos != Not_found) {
+            auto sz = size() - pos;
+            str.replace(0, size(), str.c_str() + pos, sz);
+        }
+
+        return *this;
+    }
+
+    String& lstrip(const char* string)
+    {
+        for (unsigned i = 0; i < strlen(string); ++i)
+            lstrip(string[i]);
+
+        return *this;
+    }
+
+    String& lstrip(const std::string& string)
+    {
+        for (const auto ch : string)
+            lstrip(ch);
+
+        return *this;
+    }
+
+    String& lstrip(const String& string)
+    {
+        for (const auto ch : string)
+            lstrip(ch);
+
+        return *this;
+    }
+
     String& swapcase()
     {
         for (auto& c : str) {
