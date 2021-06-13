@@ -28,6 +28,11 @@ struct String {
 
     String() = default;
 
+    String copy() const
+    {
+        return String(str);
+    }
+
     size_type str_index(int rel_pos) const
     {
         return static_cast<size_type>(rel_pos >= 0 ? rel_pos : size() + rel_pos);
