@@ -117,6 +117,13 @@ struct String {
         return *this;
     }
 
+    String& capitalize()
+    {
+        if (!empty())
+            str[0] = std::toupper(str[0]);
+        return *this;
+    }
+
     std::string str {};
 };
 

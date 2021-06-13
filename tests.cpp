@@ -101,7 +101,7 @@ TEST_CASE("Appending, inserting and deleting characters")
 
     SUBCASE("Append character or string")
     {
-        std::string s{"s"};
+        std::string s { "s" };
         py_str += 's';
         CHECK(py_str == "Hello worlds");
         py_str += "s";
@@ -112,7 +112,7 @@ TEST_CASE("Appending, inserting and deleting characters")
 
     SUBCASE("Add strings or characters together")
     {
-        std::string s{"s"};
+        std::string s { "s" };
         CHECK((py_str + 's') == "Hello worlds");
         CHECK(('s' + py_str) == "sHello world");
         CHECK((py_str + String("!")) == "Hello world!");
@@ -145,4 +145,11 @@ TEST_CASE("Appending, inserting and deleting characters")
         CHECK(py_str.del(5) == "Helloworld");
         CHECK(py_str.del(-1) == "Helloworl");
     }
+}
+
+TEST_CASE("Capitalize string")
+{
+    CHECK(String("hello world").capitalize() == "Hello world");
+    CHECK(String("123 number").capitalize() == "123 number");
+    CHECK(String().capitalize() == "");
 }
