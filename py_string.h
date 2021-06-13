@@ -383,7 +383,7 @@ struct String {
     String& lstrip(const char ch = ' ')
     {
         auto pos = str.find_first_not_of(ch);
-        if (pos != Not_found) {
+        if (pos != Not_found && pos != 0) {
             auto sz = size() - pos;
             str.replace(0, size(), str.c_str() + pos, sz);
         }
@@ -394,7 +394,7 @@ struct String {
     String& lstrip(const char* string)
     {
         auto pos = str.find_first_not_of(string);
-        if (pos != Not_found) {
+        if (pos != Not_found && pos != 0) {
             auto sz = size() - pos;
             str.replace(0, size(), str.c_str() + pos, sz);
         }
@@ -405,7 +405,7 @@ struct String {
     String& lstrip(const std::string& string)
     {
         auto pos = str.find_first_not_of(string);
-        if (pos != Not_found) {
+        if (pos != Not_found && pos != 0) {
             auto sz = size() - pos;
             str.replace(0, size(), str.c_str() + pos, sz);
         }
@@ -416,7 +416,7 @@ struct String {
     String& lstrip(const String& string)
     {
         auto pos = str.find_first_not_of(string.str);
-        if (pos != Not_found) {
+        if (pos != Not_found && pos != 0) {
             auto sz = size() - pos;
             str.replace(0, size(), str.c_str() + pos, sz);
         }
