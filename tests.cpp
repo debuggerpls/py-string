@@ -61,11 +61,11 @@ TEST_CASE("Indexing strings")
 
     SUBCASE("Looping through string")
     {
-        for (auto c: py_str) {
+        for (auto c : py_str) {
             CHECK(typeid(c) == typeid(char));
         }
 
-        for (auto &c: py_str) {
+        for (auto& c : py_str) {
             c += 1;
             CHECK(typeid(c) == typeid(char));
         }
@@ -82,9 +82,17 @@ TEST_CASE("Slicing strings")
 
     SUBCASE("Using slice methods")
     {
+        CHECK(py_str.slice(0, 4) == "Hello");
+        CHECK(py_str.slice(-2, -1) == "ld");
+        CHECK(py_str.slice(3, 2) == "");
     }
 
     SUBCASE("Using operator()")
     {
+        CHECK(py_str(0, 4) == "Hello");
+        CHECK(py_str(-2, -1) == "ld");
+        CHECK(py_str(3, 2) == "");
     }
 }
+
+
