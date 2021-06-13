@@ -31,14 +31,17 @@ struct String {
         return size();
     }
 
-
-
     const char* c_str() const
     {
         return str.c_str();
     }
 
     char& operator[](int i)
+    {
+        return i < 0 ? str[str.size() + i] : str[i];
+    }
+
+    const char& operator[](int i) const
     {
         return i < 0 ? str[str.size() + i] : str[i];
     }
@@ -69,12 +72,12 @@ std::ostream& operator<<(std::ostream& out, const String& string)
 
 const char* begin(const String& string)
 {
-    return string.c_str();
+    return &string[0];
 }
 
 const char* end(const String& string)
 {
-    return string.c_str() + string.len();
+    return &string[string.len()];
 }
 
 char* begin(String& string)
