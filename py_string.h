@@ -23,6 +23,11 @@ struct String {
 
     String() = default;
 
+    size_type index(int pos) const
+    {
+        return static_cast<size_type>(pos > 0 ? pos : len() + pos);
+    }
+
     bool empty() const
     {
         return str.empty();
@@ -64,6 +69,54 @@ struct String {
         return slice(from, to);
     }
 
+    String& operator+=(char c)
+    {
+        str += c;
+        return *this;
+    }
+
+    String& operator+=(const char* string)
+    {
+        str += string;
+        return *this;
+    }
+
+    String& operator+=(const std::string& string)
+    {
+        str += string;
+        return *this;
+    }
+
+    String& insert(int pos, char c)
+    {
+        str.insert(pos, 1, c);
+        return *this;
+    }
+
+    String& insert(int pos, const char* string)
+    {
+        str.insert(pos, string);
+        return *this;
+    }
+
+    String& insert(int pos, const String& string)
+    {
+        str.insert(pos, string.c_str());
+        return *this;
+    }
+
+    String& insert(int pos, const std::string& string)
+    {
+        str.insert(pos, string);
+        return *this;
+    }
+
+    String& del(int pos)
+    {
+        str.erase(index(pos), 1);
+        return *this;
+    }
+
     std::string str {};
 };
 
@@ -86,6 +139,26 @@ std::ostream& operator<<(std::ostream& out, const String& string)
 {
     out << string.str;
     return out;
+}
+
+String operator+(const String& lhs, const String& rhs)
+{
+    return String(lhs.str + rhs.str);
+}
+
+String operator+(const String& lhs, const std::string& rhs)
+{
+    return String(lhs.str + rhs);
+}
+
+String operator+(const String& lhs, const char& rhs)
+{
+    return String(lhs.str + rhs);
+}
+
+String operator+(const char lhs, const String& rhs)
+{
+    return String(lhs + rhs.str);
 }
 
 const char* begin(const String& string)

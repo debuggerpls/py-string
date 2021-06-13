@@ -95,4 +95,54 @@ TEST_CASE("Slicing strings")
     }
 }
 
+TEST_CASE("Appending, inserting and deleting characters")
+{
+    String py_str { "Hello world" };
 
+    SUBCASE("Append character or string")
+    {
+        std::string s{"s"};
+        py_str += 's';
+        CHECK(py_str == "Hello worlds");
+        py_str += "s";
+        CHECK(py_str == "Hello worldss");
+        py_str += s;
+        CHECK(py_str == "Hello worldsss");
+    }
+
+    SUBCASE("Add strings or characters together")
+    {
+        std::string s{"s"};
+        CHECK((py_str + 's') == "Hello worlds");
+        CHECK(('s' + py_str) == "sHello world");
+        CHECK((py_str + String("!")) == "Hello world!");
+        CHECK((py_str + s) == "Hello worlds");
+        CHECK((s + py_str) == "sHello world");
+    }
+
+    SUBCASE("Insert char at index")
+    {
+        CHECK(py_str.insert(5, ',') == "Hello, world");
+    }
+
+    SUBCASE("Insert char* at index")
+    {
+        CHECK(py_str.insert(6, "dear ") == "Hello dear world");
+    }
+
+    SUBCASE("Insert String at index")
+    {
+        CHECK(py_str.insert(6, String("dear ")) == "Hello dear world");
+    }
+
+    SUBCASE("Insert std::string at index")
+    {
+        CHECK(py_str.insert(6, std::string("dear ")) == "Hello dear world");
+    }
+
+    SUBCASE("Delete character at index")
+    {
+        CHECK(py_str.del(5) == "Helloworld");
+        CHECK(py_str.del(-1) == "Helloworl");
+    }
+}
