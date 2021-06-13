@@ -220,8 +220,18 @@ TEST_CASE("Check if all chars are alphanumeric")
 TEST_CASE("Check if all chars are lowercase")
 {
     CHECK(String().islower() == false);
+    CHECK(String(" ").islower() == false);
     CHECK(String("123455aZd").islower() == false);
-    CHECK(String("hello world").islower() == false);
+    CHECK(String("hello world!").islower() == true);
     CHECK(String("hello").islower() == true);
     CHECK(String("hello123").islower() == true);
 }
+
+//TEST_CASE("Check if all chars are uppercase")
+//{
+//    CHECK(String().isupper() == false);
+//    CHECK(String(" ").isupper() == false);
+//    CHECK(String("123455aZd").isupper() == false);
+//    CHECK(String("HELLO WORLD").isupper() == true);
+//    CHECK(String("HELLO123").isupper() == true);
+//}

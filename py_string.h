@@ -271,11 +271,15 @@ struct String {
         if (empty())
             return false;
 
-        for (auto c : str)
-            if (!std::islower(c) && !std::isdigit(c))
-                return false;
+        bool contains_lower = false;
 
-        return true;
+        for (auto c : str) {
+            contains_lower |= std::islower(c);
+            if (!std::islower(c) && !std::isdigit(c) && !std::isspace(c) && !std::ispunct(c))
+                return false;
+        }
+
+        return contains_lower;
     }
 
     std::string str {};
