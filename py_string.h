@@ -298,6 +298,19 @@ struct String {
         return contains_upper;
     }
 
+    bool isspace() const
+    {
+        if (empty())
+            return false;
+
+        for (auto c : str) {
+            if (!std::isspace(c))
+                return false;
+        }
+
+        return true;
+    }
+
     std::string str {};
 };
 

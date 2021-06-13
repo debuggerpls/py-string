@@ -234,3 +234,11 @@ TEST_CASE("Check if all chars are uppercase")
     CHECK(String("HELLO WORLD!").isupper() == true);
     CHECK(String("HELLO123.").isupper() == true);
 }
+
+TEST_CASE("Check if all chars are whitespaces")
+{
+    CHECK(String().isspace() == false);
+    CHECK(String(" s ").isspace() == false);
+    CHECK(String(" ").isspace() == true);
+    CHECK(String("\n\t  ").isspace() == true);
+}
