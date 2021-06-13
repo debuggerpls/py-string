@@ -335,6 +335,36 @@ struct String {
         return *this;
     }
 
+    size_type rfind(const char* value) const
+    {
+        return str.rfind(value);
+    }
+
+    size_type rfind(const std::string& value) const
+    {
+        return str.rfind(value);
+    }
+
+    size_type rfind(const String& value) const
+    {
+        return str.rfind(value.str);
+    }
+
+    size_type rindex(const char* value) const
+    {
+        return rfind(value);
+    }
+
+    size_type rindex(const std::string& value) const
+    {
+        return rfind(value);
+    }
+
+    size_type rindex(const String& value) const
+    {
+        return rfind(value);
+    }
+
     std::string str {};
 };
 

@@ -263,3 +263,12 @@ TEST_CASE("Replace phrase with another one")
     CHECK(String("work hard, play hard, die hard").replace("hard", "easier") == "work easier, play easier, die easier");
     CHECK(String("work hard, play hard, die hard").replace("hard", "") == "work , play , die ");
 }
+
+TEST_CASE("Find last position of value in string")
+{
+    CHECK(String("").rfind("hi") == Not_found);
+    CHECK(String("Hello world world").rfind("worl") == 12);
+
+    CHECK(String("").rindex("hi") == Not_found);
+    CHECK(String("Hello world world").rindex("worl") == 12);
+}
