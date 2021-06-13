@@ -387,6 +387,20 @@ struct String {
         return *this;
     }
 
+    String& zfill(size_type len)
+    {
+        if (len < size())
+            return *this;
+
+        auto sz = size();
+        str.resize(len);
+        str.replace(len - sz, sz, str.c_str(), sz);
+        for (unsigned i = 0; i < len - sz; ++i)
+            str[i] = '0';
+
+        return *this;
+    }
+
     std::string str {};
 };
 

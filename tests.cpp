@@ -286,3 +286,11 @@ TEST_CASE("Convert string to uppercase")
 {
     CHECK(String("Hello world 123!\t#").upper() == "HELLO WORLD 123!\t#");
 }
+
+TEST_CASE("Add zeros at he beginning of string")
+{
+    CHECK(String("hello").zfill(10) == "00000hello");
+    CHECK(String("welcome to the jungle").zfill(10) == "welcome to the jungle");
+    CHECK(String("10.000").zfill(10) == "000010.000");
+    CHECK(String().zfill(5) == "00000");
+}
