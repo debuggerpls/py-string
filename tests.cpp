@@ -255,3 +255,11 @@ TEST_CASE("Copy String")
     CHECK(original.copy().lower() == "original");
     CHECK(original == "Original");
 }
+
+TEST_CASE("Replace phrase with another one")
+{
+    CHECK(String("I like bananas").replace("bananas", "apples") == "I like apples");
+    CHECK(String("I like bananas, do you like bananas?").replace("bananas", "apples") == "I like apples, do you like apples?");
+    CHECK(String("work hard, play hard, die hard").replace("hard", "easier") == "work easier, play easier, die easier");
+    CHECK(String("work hard, play hard, die hard").replace("hard", "") == "work , play , die ");
+}

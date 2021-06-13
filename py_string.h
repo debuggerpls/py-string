@@ -326,6 +326,15 @@ struct String {
         return casefold();
     }
 
+    String& replace(const char* oldvalue, const char* newvalue)
+    {
+        for (size_type pos = 0; str.npos != (pos = str.find(oldvalue, pos, strlen(oldvalue))); pos += strlen(newvalue)) {
+            str.replace(pos, strlen(oldvalue), newvalue, strlen(newvalue));
+        }
+
+        return *this;
+    }
+
     std::string str {};
 };
 
