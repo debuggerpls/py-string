@@ -186,3 +186,18 @@ TEST_CASE("Find value in string")
     CHECK(String("").index("hi") == Not_found);
     CHECK(String("Hello world").index("worl") == 6);
 }
+
+TEST_CASE("Check if all chars are in the alphabet")
+{
+    SUBCASE("No special chars like spaces")
+    {
+        CHECK(String("hello").isalpha() == true);
+        CHECK(String("TesLa").isalpha() == true);
+    }
+
+    SUBCASE("Special chars like spaces")
+    {
+        CHECK(String("hello world").isalpha() == false);
+        CHECK(String("\n\t").isalpha() == false);
+    }
+}

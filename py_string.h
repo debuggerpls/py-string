@@ -230,6 +230,15 @@ struct String {
         return find(value);
     }
 
+    bool isalpha() const
+    {
+        for (auto c : str)
+            if (!std::isalpha(c))
+                return false;
+
+        return true;
+    }
+
     std::string str {};
 };
 
