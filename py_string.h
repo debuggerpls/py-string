@@ -282,6 +282,22 @@ struct String {
         return contains_lower;
     }
 
+    bool isupper() const
+    {
+        if (empty())
+            return false;
+
+        bool contains_upper = false;
+
+        for (auto c : str) {
+            contains_upper |= std::isupper(c);
+            if (!std::isupper(c) && !std::isdigit(c) && !std::isspace(c) && !std::ispunct(c))
+                return false;
+        }
+
+        return contains_upper;
+    }
+
     std::string str {};
 };
 
