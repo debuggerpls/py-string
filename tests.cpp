@@ -182,4 +182,7 @@ TEST_CASE("Find value in string")
     CHECK(String("Hello world").find("worl") == 6);
     CHECK(String("Hello world").find(String("worl")) == 6);
     CHECK(String("Hello world").find(std::string("worl")) == 6);
+
+    CHECK(String("").index("hi") == Not_found);
+    CHECK(String("Hello world").index("worl") == 6);
 }

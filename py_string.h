@@ -215,6 +215,21 @@ struct String {
         return str.find(value.str);
     }
 
+    size_type index(const char* value) const
+    {
+        return find(value);
+    }
+
+    size_type index(const std::string& value) const
+    {
+        return find(value);
+    }
+
+    size_type index(const String& value) const
+    {
+        return find(value);
+    }
+
     std::string str {};
 };
 
