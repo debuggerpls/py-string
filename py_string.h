@@ -393,24 +393,33 @@ struct String {
 
     String& lstrip(const char* string)
     {
-        for (unsigned i = 0; i < strlen(string); ++i)
-            lstrip(string[i]);
+        auto pos = str.find_first_not_of(string);
+        if (pos != Not_found) {
+            auto sz = size() - pos;
+            str.replace(0, size(), str.c_str() + pos, sz);
+        }
 
         return *this;
     }
 
     String& lstrip(const std::string& string)
     {
-        for (const auto ch : string)
-            lstrip(ch);
+        auto pos = str.find_first_not_of(string);
+        if (pos != Not_found) {
+            auto sz = size() - pos;
+            str.replace(0, size(), str.c_str() + pos, sz);
+        }
 
         return *this;
     }
 
     String& lstrip(const String& string)
     {
-        for (const auto ch : string)
-            lstrip(ch);
+        auto pos = str.find_first_not_of(string.str);
+        if (pos != Not_found) {
+            auto sz = size() - pos;
+            str.replace(0, size(), str.c_str() + pos, sz);
+        }
 
         return *this;
     }
