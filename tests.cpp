@@ -70,7 +70,7 @@ TEST_CASE("Indexing strings")
             CHECK(typeid(c) == typeid(char));
         }
 
-        for (auto it = begin(py_str); it != end(py_str); ++it) {
+        for (auto it = py_str.begin(); it != py_str.end(); ++it) {
             CHECK(typeid(*it) == typeid(char));
         }
     }
@@ -157,4 +157,12 @@ TEST_CASE("Capitalize string")
 TEST_CASE("Casefold a string")
 {
     CHECK(String("Hello world 123").casefold() == "hello world 123");
+}
+
+TEST_CASE("Count value appearings in string")
+{
+    CHECK(String("I like apples, my favourite food is apples").count("apples") == 2);
+    CHECK(String("I like apples, my favourite food is apples").count("!") == 0);
+    CHECK(String("I like apples, my favourite food is apples").count(String("apples")) == 2);
+    CHECK(String("I like apples, my favourite food is apples").count(std::string("apples")) == 2);
 }

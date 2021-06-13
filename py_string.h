@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <algorithm>
 #include <string>
 #include <utility>
 
@@ -56,6 +57,26 @@ struct String {
     const char& operator[](int pos) const
     {
         return str[index(pos)];
+    }
+
+    const char* begin() const
+    {
+        return &str[0];
+    }
+
+    const char* end() const
+    {
+        return &str[size()];
+    }
+
+    char* begin()
+    {
+        return &str[0];
+    }
+
+    char* end()
+    {
+        return &str[size()];
     }
 
     /* from and to indexes are included */
@@ -131,6 +152,35 @@ struct String {
         return *this;
     }
 
+    size_type count(const char* value, int start_pos = 0) const
+    {
+        if (empty())
+            return 0;
+
+        size_type cnt = 0;
+        size_type pos = index(start_pos);
+        auto npos = std::string::npos;
+        while (pos != npos) {
+            pos = str.find(value, pos);
+            if (pos != npos) {
+                ++cnt;
+                pos += strlen(value);
+            }
+        }
+
+        return cnt;
+    }
+
+    size_type count(const String& value, int start_pos = 0) const
+    {
+        return count(value.c_str(), start_pos);
+    }
+
+    size_type count(const std::string& value, int start_pos = 0) const
+    {
+        return count(value.c_str(), start_pos);
+    }
+
     std::string str {};
 };
 
@@ -173,26 +223,6 @@ String operator+(const String& lhs, const char& rhs)
 String operator+(const char lhs, const String& rhs)
 {
     return String(lhs + rhs.str);
-}
-
-const char* begin(const String& string)
-{
-    return &string[0];
-}
-
-const char* end(const String& string)
-{
-    return &string[string.len()];
-}
-
-char* begin(String& string)
-{
-    return &string[0];
-}
-
-char* end(String& string)
-{
-    return &string[string.len()];
 }
 
 }
