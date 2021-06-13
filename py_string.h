@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include <algorithm>
 #include <string>
 #include <utility>
 
@@ -179,6 +178,21 @@ struct String {
     size_type count(const std::string& value, int start_pos = 0) const
     {
         return count(value.c_str(), start_pos);
+    }
+
+    bool endswith(const char* value) const
+    {
+        return str.rfind(value) == str.size() - strlen(value);
+    }
+
+    bool endswith(const std::string& value) const
+    {
+        return str.rfind(value) == str.size() - value.size();
+    }
+
+    bool endswith(const String& value) const
+    {
+        return str.rfind(value.c_str()) == str.size() - value.size();
     }
 
     std::string str {};

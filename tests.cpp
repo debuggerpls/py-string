@@ -166,3 +166,12 @@ TEST_CASE("Count value appearings in string")
     CHECK(String("I like apples, my favourite food is apples").count(String("apples")) == 2);
     CHECK(String("I like apples, my favourite food is apples").count(std::string("apples")) == 2);
 }
+
+TEST_CASE("Endswith method")
+{
+    CHECK(String("Hello world.").endswith(".") == true);
+    CHECK(String("Hello world.").endswith("world.") == true);
+    CHECK(String("Hello world.").endswith("!") == false);
+    CHECK(String("Hello world.").endswith(std::string("ld.")) == true);
+    CHECK(String("Hello world.").endswith(String(".")) == true);
+}
