@@ -124,6 +124,13 @@ struct String {
         return *this;
     }
 
+    String& casefold()
+    {
+        for (auto& c : str)
+            c = tolower(c);
+        return *this;
+    }
+
     std::string str {};
 };
 

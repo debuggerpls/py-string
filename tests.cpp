@@ -153,3 +153,8 @@ TEST_CASE("Capitalize string")
     CHECK(String("123 number").capitalize() == "123 number");
     CHECK(String().capitalize() == "");
 }
+
+TEST_CASE("Casefold a string")
+{
+    CHECK(String("Hello world 123").casefold() == "hello world 123");
+}
