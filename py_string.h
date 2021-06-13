@@ -25,7 +25,7 @@ struct String {
 
     size_type index(int pos) const
     {
-        return static_cast<size_type>(pos > 0 ? pos : len() + pos);
+        return static_cast<size_type>(pos >= 0 ? pos : size() + pos);
     }
 
     bool empty() const
@@ -48,20 +48,20 @@ struct String {
         return str.c_str();
     }
 
-    char& operator[](int i)
+    char& operator[](int pos)
     {
-        return i < 0 ? str[str.size() + i] : str[i];
+        return str[index(pos)];
     }
 
-    const char& operator[](int i) const
+    const char& operator[](int pos) const
     {
-        return i < 0 ? str[str.size() + i] : str[i];
+        return str[index(pos)];
     }
 
     /* from and to indexes are included */
     String slice(int from, int to) const
     {
-        return from > to ? String() : String(str.substr(static_cast<size_type>(from >= 0 ? from : len() + from), static_cast<size_type>(to >= 0 ? to + 1 : len() + to + 1)));
+        return from > to ? String() : String(str.substr(index(from), index(to) + 1));
     }
 
     String operator()(int from, int to) const
@@ -89,25 +89,25 @@ struct String {
 
     String& insert(int pos, char c)
     {
-        str.insert(pos, 1, c);
+        str.insert(index(pos), 1, c);
         return *this;
     }
 
     String& insert(int pos, const char* string)
     {
-        str.insert(pos, string);
+        str.insert(index(pos), string);
         return *this;
     }
 
     String& insert(int pos, const String& string)
     {
-        str.insert(pos, string.c_str());
+        str.insert(index(pos), string.c_str());
         return *this;
     }
 
     String& insert(int pos, const std::string& string)
     {
-        str.insert(pos, string);
+        str.insert(index(pos), string);
         return *this;
     }
 
