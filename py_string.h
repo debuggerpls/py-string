@@ -380,6 +380,19 @@ struct String {
         return str.find(value.c_str()) == 0;
     }
 
+    String& swapcase()
+    {
+        for (auto& c : str) {
+            if (std::isupper(c)) {
+                c = std::tolower(c);
+            } else if (std::islower(c)) {
+                c = std::toupper(c);
+            }
+        }
+
+        return *this;
+    }
+
     String& upper()
     {
         for (auto& c : str)
