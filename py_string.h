@@ -464,6 +464,38 @@ struct String {
         return *this;
     }
 
+    String& strip(const char ch = ' ')
+    {
+        lstrip(ch);
+        rstrip(ch);
+
+        return *this;
+    }
+
+    String& strip(const char* string)
+    {
+        lstrip(string);
+        rstrip(string);
+
+        return *this;
+    }
+
+    String& strip(const std::string& string)
+    {
+        lstrip(string);
+        rstrip(string);
+
+        return *this;
+    }
+
+    String& strip(const String& string)
+    {
+        lstrip(string);
+        rstrip(string);
+
+        return *this;
+    }
+
     String& swapcase()
     {
         for (auto& c : str) {

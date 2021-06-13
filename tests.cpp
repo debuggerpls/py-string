@@ -321,3 +321,12 @@ TEST_CASE("Strip right side")
     CHECK(String("Hello world#!...,").rstrip("#.,!") == "Hello world");
     CHECK(String("Hello world#!...,").rstrip("!.,#") == "Hello world");
 }
+
+TEST_CASE("Strip characters from both sides")
+{
+    CHECK(String("   Hello world   ").strip() == "Hello world");
+    CHECK(String("   Hello world   ").strip().len() == strlen("Hello world"));
+    CHECK(String("Hello").strip() == "Hello");
+    CHECK(String(",,,,,,,,,!!!!Hello world#!...,").strip("#.,!") == "Hello world");
+    CHECK(String("####Hello world#!...,").strip("!.,#") == "Hello world");
+}
