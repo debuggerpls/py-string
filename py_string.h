@@ -365,6 +365,21 @@ struct String {
         return rfind(value);
     }
 
+    bool startswith(const char* value) const
+    {
+        return str.find(value) == 0;
+    }
+
+    bool startswith(const std::string& value) const
+    {
+        return str.find(value) == 0;
+    }
+
+    bool startswith(const String& value) const
+    {
+        return str.find(value.c_str()) == 0;
+    }
+
     std::string str {};
 };
 

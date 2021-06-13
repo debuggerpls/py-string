@@ -272,3 +272,12 @@ TEST_CASE("Find last position of value in string")
     CHECK(String("").rindex("hi") == Not_found);
     CHECK(String("Hello world world").rindex("worl") == 12);
 }
+
+TEST_CASE("Check if string startswith phrase")
+{
+    CHECK(String("Hello world.").startswith(".") == false);
+    CHECK(String("Hello world.").startswith("Hello") == true);
+    CHECK(String("Hello world.").startswith("!") == false);
+    CHECK(String("Hello world.").startswith(std::string("Hello")) == true);
+    CHECK(String("Hello world.").startswith(String("Hello")) == true);
+}
