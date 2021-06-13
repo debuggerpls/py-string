@@ -120,27 +120,27 @@ TEST_CASE("Appending, inserting and deleting characters")
         CHECK((s + py_str) == "sHello world");
     }
 
-    SUBCASE("Insert char at index")
+    SUBCASE("Insert char at str_index")
     {
         CHECK(py_str.insert(5, ',') == "Hello, world");
     }
 
-    SUBCASE("Insert char* at index")
+    SUBCASE("Insert char* at str_index")
     {
         CHECK(py_str.insert(6, "dear ") == "Hello dear world");
     }
 
-    SUBCASE("Insert String at index")
+    SUBCASE("Insert String at str_index")
     {
         CHECK(py_str.insert(6, String("dear ")) == "Hello dear world");
     }
 
-    SUBCASE("Insert std::string at index")
+    SUBCASE("Insert std::string at str_index")
     {
         CHECK(py_str.insert(6, std::string("dear ")) == "Hello dear world");
     }
 
-    SUBCASE("Delete character at index")
+    SUBCASE("Delete character at str_index")
     {
         CHECK(py_str.del(5) == "Helloworld");
         CHECK(py_str.del(-1) == "Helloworl");
@@ -174,4 +174,12 @@ TEST_CASE("Endswith method")
     CHECK(String("Hello world.").endswith("!") == false);
     CHECK(String("Hello world.").endswith(std::string("ld.")) == true);
     CHECK(String("Hello world.").endswith(String(".")) == true);
+}
+
+TEST_CASE("Find value in string")
+{
+    CHECK(String("").find("hi") == Not_found);
+    CHECK(String("Hello world").find("worl") == 6);
+    CHECK(String("Hello world").find(String("worl")) == 6);
+    CHECK(String("Hello world").find(std::string("worl")) == 6);
 }

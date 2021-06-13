@@ -11,9 +11,9 @@
 #include <utility>
 
 namespace py_str {
+constexpr auto Not_found = std::string::npos;
 
 struct String {
-
     using size_type = std::string::size_type;
 
     String(std::string str)
@@ -21,11 +21,16 @@ struct String {
     {
     }
 
+    String(const char* str)
+        : str(str)
+    {
+    }
+
     String() = default;
 
-    size_type index(int pos) const
+    size_type str_index(int rel_pos) const
     {
-        return static_cast<size_type>(pos >= 0 ? pos : size() + pos);
+        return static_cast<size_type>(rel_pos >= 0 ? rel_pos : size() + rel_pos);
     }
 
     bool empty() const
@@ -33,7 +38,7 @@ struct String {
         return str.empty();
     }
 
-    std::string::size_type size() const
+    size_type size() const
     {
         return str.size();
     }
@@ -50,12 +55,12 @@ struct String {
 
     char& operator[](int pos)
     {
-        return str[index(pos)];
+        return str[str_index(pos)];
     }
 
     const char& operator[](int pos) const
     {
-        return str[index(pos)];
+        return str[str_index(pos)];
     }
 
     const char* begin() const
@@ -81,7 +86,7 @@ struct String {
     /* from and to indexes are included */
     String slice(int from, int to) const
     {
-        return from > to ? String() : String(str.substr(index(from), index(to) + 1));
+        return from > to ? String() : String(str.substr(str_index(from), str_index(to) + 1));
     }
 
     String operator()(int from, int to) const
@@ -109,31 +114,31 @@ struct String {
 
     String& insert(int pos, char c)
     {
-        str.insert(index(pos), 1, c);
+        str.insert(str_index(pos), 1, c);
         return *this;
     }
 
     String& insert(int pos, const char* string)
     {
-        str.insert(index(pos), string);
+        str.insert(str_index(pos), string);
         return *this;
     }
 
     String& insert(int pos, const String& string)
     {
-        str.insert(index(pos), string.c_str());
+        str.insert(str_index(pos), string.c_str());
         return *this;
     }
 
     String& insert(int pos, const std::string& string)
     {
-        str.insert(index(pos), string);
+        str.insert(str_index(pos), string);
         return *this;
     }
 
     String& del(int pos)
     {
-        str.erase(index(pos), 1);
+        str.erase(str_index(pos), 1);
         return *this;
     }
 
@@ -157,7 +162,7 @@ struct String {
             return 0;
 
         size_type cnt = 0;
-        size_type pos = index(start_pos);
+        size_type pos = str_index(start_pos);
         auto npos = std::string::npos;
         while (pos != npos) {
             pos = str.find(value, pos);
@@ -195,18 +200,23 @@ struct String {
         return str.rfind(value.c_str()) == str.size() - value.size();
     }
 
+    size_type find(const char* value) const
+    {
+        return str.find(value);
+    }
+
+    size_type find(const std::string& value) const
+    {
+        return str.find(value);
+    }
+
+    size_type find(const String& value) const
+    {
+        return str.find(value.str);
+    }
+
     std::string str {};
 };
-
-bool operator==(const String& lhs, const std::string& rhs)
-{
-    return lhs.str == rhs;
-}
-
-bool operator==(const std::string& lhs, const String& rhs)
-{
-    return lhs == rhs.str;
-}
 
 bool operator==(const String& lhs, const String& rhs)
 {
