@@ -266,6 +266,18 @@ struct String {
         return true;
     }
 
+    bool islower() const
+    {
+        if (empty())
+            return false;
+
+        for (auto c : str)
+            if (!std::islower(c) && !std::isdigit(c))
+                return false;
+
+        return true;
+    }
+
     std::string str {};
 };
 

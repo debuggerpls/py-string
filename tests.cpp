@@ -216,3 +216,12 @@ TEST_CASE("Check if all chars are alphanumeric")
     CHECK(String("123455aZd").isalnum() == true);
     CHECK(String("! 2131").isalnum() == false);
 }
+
+TEST_CASE("Check if all chars are lowercase")
+{
+    CHECK(String().islower() == false);
+    CHECK(String("123455aZd").islower() == false);
+    CHECK(String("hello world").islower() == false);
+    CHECK(String("hello").islower() == true);
+    CHECK(String("hello123").islower() == true);
+}
