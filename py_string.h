@@ -380,6 +380,13 @@ struct String {
         return str.find(value.c_str()) == 0;
     }
 
+    String& upper()
+    {
+        for (auto& c : str)
+            c = std::toupper(c);
+        return *this;
+    }
+
     std::string str {};
 };
 

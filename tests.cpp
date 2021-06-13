@@ -281,3 +281,8 @@ TEST_CASE("Check if string startswith phrase")
     CHECK(String("Hello world.").startswith(std::string("Hello")) == true);
     CHECK(String("Hello world.").startswith(String("Hello")) == true);
 }
+
+TEST_CASE("Convert string to uppercase")
+{
+    CHECK(String("Hello world 123!\t#").upper() == "HELLO WORLD 123!\t#");
+}
