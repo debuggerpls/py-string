@@ -1,7 +1,7 @@
 ### py-string, header-only python string library for cpp
 
 Header-only library to interact with strings in python-like
-matter. This project is for learning and applying TDD.
+matter.
 
 #### NOTE
 Most methods on `py_str::String` instances change the original string.
@@ -13,4 +13,4 @@ in mind (and any performace improvements are welcome),
 but it still should not waste resources. 
 
 Thus use `copy()` on the original `py_str::String` before you start 
-manipulating it, if you want to keep original unchanged.
+manipulating it, if you want to keep the original unchanged.
