@@ -382,10 +382,15 @@ struct String {
 
     String& lstrip(const char ch = ' ')
     {
+        if (empty())
+            return *this;
+
         auto pos = str.find_first_not_of(ch);
         if (pos != Not_found && pos != 0) {
             auto sz = size() - pos;
             str.replace(0, size(), str.c_str() + pos, sz);
+        } else if (pos == Not_found && str.find_first_of(ch) != Not_found) {
+            str.clear();
         }
 
         return *this;
@@ -393,10 +398,15 @@ struct String {
 
     String& lstrip(const char* string)
     {
+        if (empty())
+            return *this;
+
         auto pos = str.find_first_not_of(string);
         if (pos != Not_found && pos != 0) {
             auto sz = size() - pos;
             str.replace(0, size(), str.c_str() + pos, sz);
+        } else if (pos == Not_found && str.find_first_of(string) != Not_found) {
+            str.clear();
         }
 
         return *this;
@@ -404,10 +414,15 @@ struct String {
 
     String& lstrip(const std::string& string)
     {
+        if (empty())
+            return *this;
+
         auto pos = str.find_first_not_of(string);
         if (pos != Not_found && pos != 0) {
             auto sz = size() - pos;
             str.replace(0, size(), str.c_str() + pos, sz);
+        } else if (pos == Not_found && str.find_first_of(string) != Not_found) {
+            str.clear();
         }
 
         return *this;
@@ -415,10 +430,15 @@ struct String {
 
     String& lstrip(const String& string)
     {
+        if (empty())
+            return *this;
+
         auto pos = str.find_first_not_of(string.str);
         if (pos != Not_found && pos != 0) {
             auto sz = size() - pos;
             str.replace(0, size(), str.c_str() + pos, sz);
+        } else if (pos == Not_found && str.find_first_of(string.str) != Not_found) {
+            str.clear();
         }
 
         return *this;
@@ -426,9 +446,14 @@ struct String {
 
     String& rstrip(const char ch = ' ')
     {
+        if (empty())
+            return *this;
+
         auto pos = str.find_last_not_of(ch);
         if (pos != Not_found) {
             str.resize(pos + 1);
+        } else if (str.find_first_of(ch) != Not_found) {
+            str.clear();
         }
 
         return *this;
@@ -436,9 +461,14 @@ struct String {
 
     String& rstrip(const char* string)
     {
+        if (empty())
+            return *this;
+
         auto pos = str.find_last_not_of(string);
         if (pos != Not_found) {
             str.resize(pos + 1);
+        } else if (str.find_first_of(string) != Not_found) {
+            str.clear();
         }
 
         return *this;
@@ -446,9 +476,14 @@ struct String {
 
     String& rstrip(const std::string& string)
     {
+        if (empty())
+            return *this;
+
         auto pos = str.find_last_not_of(string);
         if (pos != Not_found) {
             str.resize(pos + 1);
+        } else if (str.find_first_of(string) != Not_found) {
+            str.clear();
         }
 
         return *this;
@@ -456,9 +491,14 @@ struct String {
 
     String& rstrip(const String& string)
     {
+        if (empty())
+            return *this;
+
         auto pos = str.find_last_not_of(string.str);
         if (pos != Not_found) {
             str.resize(pos + 1);
+        } else if (str.find_first_of(string.str) != Not_found) {
+            str.clear();
         }
 
         return *this;

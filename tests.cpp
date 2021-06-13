@@ -302,7 +302,9 @@ TEST_CASE("Swap case of chars")
 
 TEST_CASE("Strip left side")
 {
+    CHECK(String("").lstrip() == "");
     CHECK(String("   Hello world").lstrip() == "Hello world");
+    CHECK(String("Hello world   ").lstrip() == "Hello world   ");
     CHECK(String("   Hello world").lstrip().len() == strlen("Hello world"));
     CHECK(String("Hello").lstrip() == "Hello");
     CHECK(String("####Hello world").lstrip("#") == "Hello world");
@@ -316,6 +318,7 @@ TEST_CASE("Strip left side")
 
 TEST_CASE("Strip right side")
 {
+    CHECK(String("").rstrip() == "");
     CHECK(String("   Hello world").rstrip() == "   Hello world");
     CHECK(String("Hello world   ").rstrip().len() == strlen("Hello world"));
     CHECK(String("Hello").rstrip() == "Hello");
