@@ -254,6 +254,18 @@ struct String {
         return true;
     }
 
+    bool isalnum() const
+    {
+        if (empty())
+            return false;
+
+        for (auto c : str)
+            if (!std::isalnum(c))
+                return false;
+
+        return true;
+    }
+
     std::string str {};
 };
 

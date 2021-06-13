@@ -209,3 +209,10 @@ TEST_CASE("Check if all chars are digits")
     CHECK(String().isdigit() == false);
     CHECK(String("123455").isdigit() == true);
 }
+
+TEST_CASE("Check if all chars are alphanumeric")
+{
+    CHECK(String().isalnum() == false);
+    CHECK(String("123455aZd").isalnum() == true);
+    CHECK(String("! 2131").isalnum() == false);
+}
