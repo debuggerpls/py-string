@@ -311,6 +311,11 @@ struct String {
         return true;
     }
 
+    String& lower()
+    {
+        return casefold();
+    }
+
     std::string str {};
 };
 

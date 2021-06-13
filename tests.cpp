@@ -242,3 +242,8 @@ TEST_CASE("Check if all chars are whitespaces")
     CHECK(String(" ").isspace() == true);
     CHECK(String("\n\t  ").isspace() == true);
 }
+
+TEST_CASE("Convert to lowercase")
+{
+    CHECK(String("To LowerCase").lower() == "to lowercase");
+}
