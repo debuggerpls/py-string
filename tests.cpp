@@ -27,12 +27,13 @@ TEST_CASE("Construct, compare and print strings")
         CHECK(str1 == py_str1);
         CHECK(str1 == py_str2);
         CHECK(py_str1 == py_str3);
-        CHECK(String{"test"} == "test");
+        CHECK(String { "test" } == "test");
     }
 
     SUBCASE("Size")
     {
         CHECK(String("hello").size() == 5);
+        CHECK(String("hello").len() == 5);
     }
 
     SUBCASE("Print strings")
@@ -57,6 +58,22 @@ TEST_CASE("Indexing strings")
         CHECK(py_str[-1] == 'd');
         CHECK(py_str[-5] == 'w');
     }
+
+    SUBCASE("Looping through string")
+    {
+        for (auto c: py_str) {
+            CHECK(typeid(c) == typeid(char));
+        }
+
+        for (auto &c: py_str) {
+            c += 1;
+            CHECK(typeid(c) == typeid(char));
+        }
+
+        for (auto it = begin(py_str); it != end(py_str); ++it) {
+            CHECK(typeid(*it) == typeid(char));
+        }
+    }
 }
 
 TEST_CASE("Slicing strings")
@@ -65,7 +82,6 @@ TEST_CASE("Slicing strings")
 
     SUBCASE("Using slice methods")
     {
-
     }
 
     SUBCASE("Using operator()")

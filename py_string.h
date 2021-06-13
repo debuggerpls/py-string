@@ -27,6 +27,12 @@ struct String {
         return str.size();
     }
 
+    std::string::size_type len() const {
+        return size();
+    }
+
+
+
     const char* c_str() const
     {
         return str.c_str();
@@ -59,6 +65,26 @@ std::ostream& operator<<(std::ostream& out, const String& string)
 {
     out << string.str;
     return out;
+}
+
+const char* begin(const String& string)
+{
+    return string.c_str();
+}
+
+const char* end(const String& string)
+{
+    return string.c_str() + string.len();
+}
+
+char* begin(String& string)
+{
+    return &string[0];
+}
+
+char* end(String& string)
+{
+    return &string[string.len()];
 }
 
 }
