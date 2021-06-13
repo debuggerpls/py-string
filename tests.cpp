@@ -150,7 +150,7 @@ TEST_CASE("Appending, inserting and deleting characters")
 TEST_CASE("Capitalize string")
 {
     CHECK(String("hello world").capitalize() == "Hello world");
-    //    CHECK(String("Hello WORLD, HOW are you? GOOD").capitalize() == "Hello world, how are you? good");
+    CHECK(String("Hello WORLD, HOW are you? GOOD").capitalize() == "Hello world, how are you? good");
     CHECK(String("123 number").capitalize() == "123 number");
     CHECK(String().capitalize() == "");
 }

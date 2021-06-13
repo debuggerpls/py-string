@@ -149,8 +149,13 @@ struct String {
 
     String& capitalize()
     {
-        if (!empty())
-            str[0] = std::toupper(str[0]);
+        if (empty())
+            return *this;
+
+        str[0] = std::toupper(str[0]);
+        for (unsigned i = 1; i < size(); ++i)
+            str[i] = std::tolower(str[i]);
+
         return *this;
     }
 
