@@ -166,6 +166,30 @@ struct String {
         return *this;
     }
 
+    bool contains(const char* string) const
+    {
+        if (!strlen(string))
+            return false;
+
+        return (str.find(string) != Not_found);
+    }
+
+    bool contains(const std::string& string) const
+    {
+        if (string.empty())
+            return false;
+
+        return (str.find(string) != Not_found);
+    }
+
+    bool contains(const String& string) const
+    {
+        if (string.empty())
+            return false;
+
+        return (str.find(string.str) != Not_found);
+    }
+
     size_type count(const char* value, int start_pos = 0) const
     {
         if (empty())

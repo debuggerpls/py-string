@@ -335,3 +335,14 @@ TEST_CASE("Strip characters from both sides")
     CHECK(String(",,,,,,,,,!!!!Hello world#!...,").strip("#.,!") == "Hello world");
     CHECK(String("####!!-!!!").strip("!- #") == "");
 }
+
+TEST_CASE("Check if string contains a phrase")
+{
+    CHECK(String("one two three four five").contains("six") == false);
+    CHECK(String("one two three four five").contains("two") == true);
+    CHECK(String("one two three four five").contains(std::string("two")) == true);
+    CHECK(String("one two three four five").contains(String("two")) == true);
+    CHECK(String("one two three four five").contains(" ") == true);
+    /* empty strings return false */
+    CHECK(String("one two three four five").contains("") == false);
+}
