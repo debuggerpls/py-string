@@ -605,6 +605,11 @@ struct StringVector {
     {
     }
 
+    size_t vec_index(int rel_pos) const
+    {
+        return rel_pos >= 0 ? rel_pos : size() + rel_pos;
+    }
+
     bool empty() const
     {
         return strings.empty();
@@ -618,6 +623,36 @@ struct StringVector {
     size_t len() const
     {
         return size();
+    }
+
+    String& operator[](int pos)
+    {
+        return strings[vec_index(pos)];
+    }
+
+    const String& operator[](int pos) const
+    {
+        return strings[vec_index(pos)];
+    }
+
+    const String* begin() const
+    {
+        return &strings[0];
+    }
+
+    const String* end() const
+    {
+        return &strings[size()];
+    }
+
+    String* begin()
+    {
+        return &strings[0];
+    }
+
+    String* end()
+    {
+        return &strings[size()];
     }
 
     std::vector<String> strings {};

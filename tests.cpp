@@ -353,6 +353,7 @@ TEST_CASE("Constructors and basic methods for StringVector")
     StringVector strings1 = { "hello", "world" };
     StringVector strings2 { "hello", "worlds" };
     StringVector strings3 { strings1 };
+    StringVector strings4 { String("hello"), String("world") };
     REQUIRE(strings0.empty() == true);
     REQUIRE(strings0.size() == 0);
     REQUIRE(strings1.empty() == false);
@@ -362,4 +363,33 @@ TEST_CASE("Constructors and basic methods for StringVector")
     REQUIRE(strings1 != strings2);
     REQUIRE(strings2 != strings3);
     REQUIRE(strings1 == strings3);
+    REQUIRE(strings1 == strings4);
+}
+
+TEST_CASE("Indexing StringVector")
+{
+    StringVector strings { "one", "two", "three", "four" };
+
+    SUBCASE("Indexing")
+    {
+        CHECK(strings[0] == "one");
+        CHECK(strings[2] == "three");
+        CHECK(strings[-2] == "three");
+    }
+
+    SUBCASE("Looping through string")
+    {
+        for (auto str : strings) {
+            CHECK(typeid(str) == typeid(String));
+        }
+
+        for (auto& str : strings) {
+            str += 1;
+            CHECK(typeid(str) == typeid(String));
+        }
+
+        for (auto it = strings.begin(); it != strings.end(); ++it) {
+            CHECK(typeid(*it) == typeid(String));
+        }
+    }
 }
