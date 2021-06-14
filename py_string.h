@@ -117,6 +117,12 @@ struct String {
         return *this;
     }
 
+    String& operator+=(const String& string)
+    {
+        str += string.str;
+        return *this;
+    }
+
     String& insert(int pos, char c)
     {
         str.insert(str_index(pos), 1, c);
@@ -655,6 +661,20 @@ struct StringVector {
         return &strings[size()];
     }
 
+    String to_string() const
+    {
+        String str { "[" };
+        for (unsigned i = 0; i < size(); ++i) {
+            str += '\'';
+            str += strings[i];
+            str += '\'';
+            if (i != size() - 1)
+                str += ", ";
+        }
+        str += ']';
+        return str;
+    }
+
     std::vector<String> strings {};
 };
 
@@ -697,6 +717,12 @@ bool operator==(const StringVector& lhs, const StringVector& rhs)
 bool operator!=(const StringVector& lhs, const StringVector& rhs)
 {
     return lhs.strings != rhs.strings;
+}
+
+std::ostream& operator<<(std::ostream& out, const StringVector& string_vec)
+{
+    out << string_vec.to_string();
+    return out;
 }
 
 }

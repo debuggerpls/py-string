@@ -102,12 +102,15 @@ TEST_CASE("Appending, inserting and deleting characters")
     SUBCASE("Append character or string")
     {
         std::string s { "s" };
+        String ps { "ps" };
         py_str += 's';
         CHECK(py_str == "Hello worlds");
         py_str += "s";
         CHECK(py_str == "Hello worldss");
         py_str += s;
         CHECK(py_str == "Hello worldsss");
+        py_str += ps;
+        CHECK(py_str == "Hello worldsssps");
     }
 
     SUBCASE("Add strings or characters together")
@@ -364,6 +367,12 @@ TEST_CASE("Constructors and basic methods for StringVector")
     REQUIRE(strings2 != strings3);
     REQUIRE(strings1 == strings3);
     REQUIRE(strings1 == strings4);
+
+    SUBCASE("Printing")
+    {
+        std::cout << "Testing StringVector: " << strings1 << std::endl;
+        CHECK(strings1.to_string() == "['hello', 'world']");
+    }
 }
 
 TEST_CASE("Indexing StringVector")
