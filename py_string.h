@@ -16,6 +16,8 @@ constexpr auto Not_found = std::string::npos;
 struct String {
     using size_type = std::string::size_type;
 
+    String() = default;
+
     String(std::string str)
         : str(std::move(str))
     {
@@ -25,8 +27,6 @@ struct String {
         : str(str)
     {
     }
-
-    String() = default;
 
     String copy() const
     {
@@ -597,6 +597,32 @@ struct String {
     std::string str {};
 };
 
+struct StringVector {
+    explicit StringVector() = default;
+
+    StringVector(std::initializer_list<String> strings)
+        : strings(strings)
+    {
+    }
+
+    bool empty() const
+    {
+        return strings.empty();
+    }
+
+    size_t size() const
+    {
+        return strings.size();
+    }
+
+    size_t len() const
+    {
+        return size();
+    }
+
+    std::vector<String> strings {};
+};
+
 bool operator==(const String& lhs, const String& rhs)
 {
     return lhs.str == rhs.str;
@@ -626,6 +652,16 @@ String operator+(const String& lhs, const char& rhs)
 String operator+(const char lhs, const String& rhs)
 {
     return String(lhs + rhs.str);
+}
+
+bool operator==(const StringVector& lhs, const StringVector& rhs)
+{
+    return lhs.strings == rhs.strings;
+}
+
+bool operator!=(const StringVector& lhs, const StringVector& rhs)
+{
+    return lhs.strings != rhs.strings;
 }
 
 }

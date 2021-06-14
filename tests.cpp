@@ -346,3 +346,20 @@ TEST_CASE("Check if string contains a phrase")
     /* empty strings return false */
     CHECK(String("one two three four five").contains("") == false);
 }
+
+TEST_CASE("Constructors and basic methods for StringVector")
+{
+    StringVector strings0;
+    StringVector strings1 = { "hello", "world" };
+    StringVector strings2 { "hello", "worlds" };
+    StringVector strings3 { strings1 };
+    REQUIRE(strings0.empty() == true);
+    REQUIRE(strings0.size() == 0);
+    REQUIRE(strings1.empty() == false);
+    REQUIRE(strings1.size() == 2);
+    REQUIRE(strings1.len() == 2);
+    REQUIRE(strings0 != strings1);
+    REQUIRE(strings1 != strings2);
+    REQUIRE(strings2 != strings3);
+    REQUIRE(strings1 == strings3);
+}
