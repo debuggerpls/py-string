@@ -603,81 +603,6 @@ struct String {
     std::string str {};
 };
 
-struct StringVector {
-    explicit StringVector() = default;
-
-    StringVector(std::initializer_list<String> strings)
-        : strings(strings)
-    {
-    }
-
-    size_t vec_index(int rel_pos) const
-    {
-        return rel_pos >= 0 ? rel_pos : size() + rel_pos;
-    }
-
-    bool empty() const
-    {
-        return strings.empty();
-    }
-
-    size_t size() const
-    {
-        return strings.size();
-    }
-
-    size_t len() const
-    {
-        return size();
-    }
-
-    String& operator[](int pos)
-    {
-        return strings[vec_index(pos)];
-    }
-
-    const String& operator[](int pos) const
-    {
-        return strings[vec_index(pos)];
-    }
-
-    const String* begin() const
-    {
-        return &strings[0];
-    }
-
-    const String* end() const
-    {
-        return &strings[size()];
-    }
-
-    String* begin()
-    {
-        return &strings[0];
-    }
-
-    String* end()
-    {
-        return &strings[size()];
-    }
-
-    String to_string() const
-    {
-        String str { "[" };
-        for (unsigned i = 0; i < size(); ++i) {
-            str += '\'';
-            str += strings[i];
-            str += '\'';
-            if (i != size() - 1)
-                str += ", ";
-        }
-        str += ']';
-        return str;
-    }
-
-    std::vector<String> strings {};
-};
-
 bool operator==(const String& lhs, const String& rhs)
 {
     return lhs.str == rhs.str;
@@ -707,22 +632,6 @@ String operator+(const String& lhs, const char& rhs)
 String operator+(const char lhs, const String& rhs)
 {
     return String(lhs + rhs.str);
-}
-
-bool operator==(const StringVector& lhs, const StringVector& rhs)
-{
-    return lhs.strings == rhs.strings;
-}
-
-bool operator!=(const StringVector& lhs, const StringVector& rhs)
-{
-    return lhs.strings != rhs.strings;
-}
-
-std::ostream& operator<<(std::ostream& out, const StringVector& string_vec)
-{
-    out << string_vec.to_string();
-    return out;
 }
 
 }
