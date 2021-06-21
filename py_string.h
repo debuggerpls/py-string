@@ -454,6 +454,22 @@ struct String {
         return result;
     }
 
+    std::vector<String> splitlines(bool keep_line_breaks = false)
+    {
+        std::vector<String> result;
+
+        if (empty())
+            return result;
+
+        for (auto from = str.begin(), to = str.end(); from < to;) {
+            auto pos = std::find_if(from, to, [](char c) { return c == '\n'; });
+            result.emplace_back(std::string(from, keep_line_breaks ? pos + 1 : pos));
+            from = pos + 1;
+        }
+
+        return result;
+    }
+
     bool startswith(const char* value) const
     {
         return str.find(value) == 0;

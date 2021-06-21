@@ -352,9 +352,9 @@ TEST_CASE("Check if string contains a phrase")
 
 TEST_CASE("Join Strings")
 {
-    std::vector<String> strings {"hello", "world", "!"};
-    std::vector<String> strings2 {"hello", "world"};
-    std::vector<String> strings3 {"hello"};
+    std::vector<String> strings { "hello", "world", "!" };
+    std::vector<String> strings2 { "hello", "world" };
+    std::vector<String> strings3 { "hello" };
     CHECK(String("#").join(strings) == "hello#world#!");
     CHECK(String(" ").join(strings2) == "hello world");
     CHECK(String("#").join("hello") == "h#e#l#l#o");
@@ -370,8 +370,21 @@ TEST_CASE("Split String into a vector")
 
     SUBCASE("Default separator is any whitespace")
     {
-        std::vector<String> result {"welcome", "to", "the", "jungle!"};
+        std::vector<String> result { "welcome", "to", "the", "jungle!" };
         CHECK(String("welcome to the jungle!").split() == result);
         CHECK(String("welcome     to the    jungle!").split() == result);
     }
+}
+
+TEST_CASE("Split lines")
+{
+    String string { "Ladies and gentlemen,\nToday is the day!\nLet's get ready to rumble!\n" };
+    String string1 { "Ladies and gentlemen,\n\nToday is the day!\nLet's get ready to rumble!\n" };
+    std::vector<String> wo_newlines { "Ladies and gentlemen,", "Today is the day!", "Let's get ready to rumble!" };
+    std::vector<String> w_newlines { "Ladies and gentlemen,\n", "Today is the day!\n", "Let's get ready to rumble!\n" };
+    std::vector<String> wo_newlines1 { "Ladies and gentlemen,", "", "Today is the day!", "Let's get ready to rumble!" };
+
+    CHECK(string.splitlines() == wo_newlines);
+    CHECK(string.splitlines(true) == w_newlines);
+    CHECK(string1.splitlines() == wo_newlines1);
 }
