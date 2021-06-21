@@ -359,5 +359,19 @@ TEST_CASE("Join Strings")
     CHECK(String(" ").join(strings2) == "hello world");
     CHECK(String("#").join("hello") == "h#e#l#l#o");
     CHECK(String("#").join(strings3) == "h#e#l#l#o");
+}
 
+TEST_CASE("Split String into a vector")
+{
+    SUBCASE("Empty string")
+    {
+        CHECK(String().split().size() == 0);
+    }
+
+    SUBCASE("Default separator is any whitespace")
+    {
+        std::vector<String> result {"welcome", "to", "the", "jungle!"};
+        CHECK(String("welcome to the jungle!").split() == result);
+        CHECK(String("welcome     to the    jungle!").split() == result);
+    }
 }

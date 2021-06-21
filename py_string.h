@@ -431,6 +431,29 @@ struct String {
         return rfind(value);
     }
 
+    std::vector<String> split()
+    {
+        std::vector<String> result;
+
+        if (empty())
+            return result;
+
+        String string(str);
+        string.strip();
+
+        for (auto from = string.begin(), to = string.end();
+             from < to;
+             (from = std::find_if(
+                  from, to, [](char c) { return std::isalnum(c); }))) {
+            auto pos = std::find_if(from, to, [](char c) { return std::isspace(c); });
+            result.emplace_back(std::string(from, pos));
+
+            from = pos;
+        }
+
+        return result;
+    }
+
     bool startswith(const char* value) const
     {
         return str.find(value) == 0;
