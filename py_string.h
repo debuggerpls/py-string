@@ -351,6 +351,42 @@ struct String {
         return true;
     }
 
+    String& join(const String& string)
+    {
+        auto joiner { str };
+        str.clear();
+        auto last = string.size() - 1;
+        for (unsigned i = 0; i < string.size(); ++i) {
+            str += string[i];
+            if (i != last)
+                str += joiner;
+        }
+
+        return *this;
+    }
+
+    String& join(const std::vector<String>& strings)
+    {
+        if (strings.empty()) {
+            str.clear();
+            return *this;
+        }
+
+        if (strings.size() == 1)
+            return join(strings[0]);
+
+        auto joiner { str };
+        str.clear();
+        auto last = strings.size() - 1;
+        for (unsigned i = 0; i < strings.size(); ++i) {
+            str += strings[i].str;
+            if (i != last)
+                str += joiner;
+        }
+
+        return *this;
+    }
+
     String& lower()
     {
         return casefold();

@@ -350,4 +350,14 @@ TEST_CASE("Check if string contains a phrase")
     CHECK(String("one two three four five").contains("") == false);
 }
 
+TEST_CASE("Join Strings")
+{
+    std::vector<String> strings {"hello", "world", "!"};
+    std::vector<String> strings2 {"hello", "world"};
+    std::vector<String> strings3 {"hello"};
+    CHECK(String("#").join(strings) == "hello#world#!");
+    CHECK(String(" ").join(strings2) == "hello world");
+    CHECK(String("#").join("hello") == "h#e#l#l#o");
+    CHECK(String("#").join(strings3) == "h#e#l#l#o");
 
+}
